@@ -1,3 +1,9 @@
+/*
+        Author: Le Trong Dat.
+        Problem: CF187_D1_C.
+        Idea: 
+            - Binary Search + Dijkstra. 
+*/
 #include <bits/stdc++.h>
 using namespace std;
 #define forn(i, a, b)           for(int i=a; i<=b; ++i)
@@ -9,6 +15,7 @@ int reach[N];
 vector<int> adj[N];
 void read()
 {
+    // read input
     cin>>n>>m>>k;
     forn(i, 1, k) 
     {
@@ -25,7 +32,8 @@ void read()
 }
 bool go(int limit)
 {
-    forn(i, 1, n) reach[i]=m+1;
+    forn(i, 1, n) reach[i]=m+1; // initialize value of reach 
+    // Dijkstra 
     #define ii pair<int, int>
     priority_queue<ii, vector<ii>, greater<ii>> pq;
     pq.push({0, location});
@@ -41,11 +49,14 @@ bool go(int limit)
             pq.push({reach[v], v});
         }
     }
-    return (reach[destination]<=limit);
+    return (reach[destination]<=limit); // if can reach the destination with reach[value] != initial value, 
+                                        // then there is a way from begin to destination
 }
 void process()
 {
     int lo=0, hi=m, rez=-1;
+
+    // Binary Search
     while (lo<=hi) 
     {
         int mid=lo+hi>>1;
