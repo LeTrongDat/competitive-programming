@@ -1,3 +1,9 @@
+/* 
+            Author: Le Trong Dat.
+            Idea: - Dynamic programming. 
+                  - Dp (i) is the number of pairs that are greater than or equal to i. 
+                  - Dp[i] = Dp[i+1] + (the number of pairs that are equal to i) => Use sieve.
+*/
 #include <bits/stdc++.h>
 using namespace std;
 #define forn(i, a, b)   for(int i=a; i<=b; ++i)
