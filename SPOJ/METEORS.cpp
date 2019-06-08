@@ -1,3 +1,8 @@
+/*
+            Author: Le Trong Dat.
+            Idea: - Using parralel binary search technique.
+                  - https://codeforces.com/blog/entry/45578.
+*/
 #include <bits/stdc++.h>
 
 using namespace std;
