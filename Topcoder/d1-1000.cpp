@@ -1,0 +1,25 @@
+The first observation:
+    - We can determine the final gift that i-th person can receive if all of them swap optimaly.
+    - Suppose the person i-th will receive the j-th gift after the swap is complete => We will add an edge from j->i which means we 
+        have to move the gift in j-th cell to i-th cell.
+Second observation:
+    - In each cell, the i-th person either has a gift i-th or will have an in edge and an out edge.
+    => graph is a set of cycles.
+    Consider the following cycle:
+    i-> j-> k-> ... -> x-> y-> m-> z-> i.
+3rd observation:
+    - We will not try to swap 2 cells that are not in the same cycle because we will create extra and non-optimal steps.
+4th observation:
+    - In one cycle, there will be at least 1 cell that does not need to swap because after moving x-1 cells to the destination 
+        (x is the size of the cycle), then the other cell will be at the its destination.
+
+    => The best way is choose the cell that does not move is the cell with the smallest index.
+    Now we will see if we swap 2 cells in a cycle, what will happen.
+    For example, when I swap the pair (i, y).
+    => Now i-th cell holding the gift of the y-th cell and vice versa
+    => The gift in cell i-th now need to jump to the cell that y-th cell need to jump to before and vice versa.
+    => After swap 2 cells (i, y) will create 2 new cycles as follows:
+       y-> j-> k -> ...-> x-> y.
+       i-> m-> z-> i.
+    and we will repeat all of steps above with 2 new small cycles.
+=> The best way to swap is to select i as the second smallest element after y.
