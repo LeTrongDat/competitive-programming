@@ -88,11 +88,10 @@ int main()
             swap(nxt[idx1], nxt[idx2]);
         }
     }
-    int sum = 0, tmp = 0;
+    int sum = 0;
     forn(i, 1, n) if (a[i].second != i && !flag[root(a[i].second)])
     {
         flag[root(a[i].second)] = true;
-        tmp ++;
         sum += abs(lab[root(a[i].second)]);
     }
     if (limit < sum) 
