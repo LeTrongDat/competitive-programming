@@ -1,6 +1,15 @@
 /*
     Author: Le Trong Dat.
-    Idea: Kuhn Munkres + two pointer.
+    Idea: Trivial observation:
+        - If [L, R] satisfies, [L, i] is also satisfied with N> = i> = R.
+        => Use two pointer.
+        For each fixed L, we will find the nearest R such that [L, R] satisfies the requirements of the problem.
+        Maintaining 1 set of daughters has not been matched.    
+        When increasing L to 1 if young man (L-1)-th is matched with daughter j-th, 
+        we will add daughter j-th to the set of daughters that have not been matched.
+        If the current set still has no daughters yet matched, we increase R and pop_back 
+        each daughters out of the set if we find augmenting path which contains only the young man in the segment L-> R.
+        => Use Kuhn Munkres.
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -13,7 +22,6 @@ int le, ri, t = 1;
 int N, M, K;
 long long result;
 int visited[maxM];
-bool flag[maxM];
 vector<int> not_match;
 bool visit(int u) {
     if (visited[u] == t) return false;
