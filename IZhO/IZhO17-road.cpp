@@ -1,3 +1,9 @@
+/*
+    Author: Le Trong Dat
+    Idea: - With each vertex, finding the three longest paths that do not intersect starting from that vertex, 
+    call their lengths x1, x2, x3. The longest route length going through vertex u is x1 * (x2 + x3) with x1> x2> x3.
+        => Dp find the 3 longest lengths from each vertex and the number of paths with the same length.
+*/
 #include <bits/stdc++.h>
 using namespace std;
 #define forn(i, a, b)               for(int i=a; i<=b; ++i)
