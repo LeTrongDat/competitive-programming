@@ -5,7 +5,6 @@ using namespace std;
 #define forn(i, a, b)       for(int i = a; i <= b; ++i)
 #define repn(i, a, b)       for(int i = a; i <  b; ++i)
 
-#define db(x)               cerr << "[x: " << x << "]\n";
 #ifndef LOCAL 
 #define cerr                if (0) cerr 
 #endif 
