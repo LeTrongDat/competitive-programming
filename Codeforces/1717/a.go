@@ -3,14 +3,43 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
+	"os"
 	"strconv"
 	"strings"
 )
 
-type Reader bufio.Reader
+type comparable interface {
+	int | int8 | int16 | int32 | int64 |
+		uint | uint8 | uint16 | uint32 | uint64 |
+		float32 | float64
+}
+
+func Max[T comparable](x, y T) T {
+	return T(math.Max(float64(x), float64(y)))
+}
+func Min[T comparable](x, y T) T {
+	return T(math.Min(float64(x), float64(y)))
+}
+
+type pair[T comparable] struct {
+	First  T
+	Second T
+}
 
 func main() {
-	fmt.Println("Hello world")
+	r := bufio.NewReader(os.Stdin)
+	tc := ReadInt(r)
+
+	pairs := []pair[int]{{1, 1}, {1, 2}, {2, 1}, {1, 3}, {3, 1}}
+	for ; tc > 0; tc -= 1 {
+		n := ReadInt(r)
+		ans := 0
+		for _, pair := range pairs {
+			ans += Min(n/pair.First, n/pair.Second)
+		}
+		fmt.Println(ans)
+	}
 }
 
 func ReadInt(r *bufio.Reader) int {
@@ -48,4 +77,3 @@ func ReadArrInt64(r *bufio.Reader) []int64 {
 	}
 	return arr
 }
-
