@@ -69,8 +69,34 @@ func write(arg ...interface{})                 { fmt.Print(arg...) }
 func writeLn(arg ...interface{})               { fmt.Println(arg...) }
 func writeFormat(f string, arg ...interface{}) { fmt.Printf(f, arg...) }
 
-func solve() {
+func unpack[T comparable](arr []T, vars ...*T) {
+	for i, vari := range vars {
+		*vari = arr[i]
+	}
+}
 
+func init1D[T comparable](n int, def T) []T {
+	arr := make([]T, n)
+	for i := 0; i < n; i++ {
+		arr[i] = def
+	}
+	return arr
+}
+
+func init2D[T comparable](n, m int, def T) [][]T {
+	arr := make([][]T, n)
+	for i := 0; i < n; i++ {
+		arr[i] = make([]T, m)
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			arr[i][j] = def
+		}
+	}
+	return arr
+}
+
+func solve() {
 }
 func main() {
 	tc := read(readInt)[0]

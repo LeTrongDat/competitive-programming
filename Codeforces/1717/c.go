@@ -69,19 +69,57 @@ func write(arg ...interface{})                 { fmt.Print(arg...) }
 func writeLn(arg ...interface{})               { fmt.Println(arg...) }
 func writeFormat(f string, arg ...interface{}) { fmt.Printf(f, arg...) }
 
-func solve() {
-	n := read(readInt)[0]
-	pairs := []pair[int]{{1, 1}, {1, 2}, {1, 3}, {2, 1}, {3, 1}}
-	ans := 0
-	for _, pair := range pairs {
-		ft, nd := pair.First, pair.Second
-		ans += Min(n/ft, n/nd)
+func unpack[T comparable](arr []T, vars ...*T) {
+	for i, vari := range vars {
+		*vari = arr[i]
 	}
-	writeLn(ans)
+}
+
+func init1D[T comparable](n int, def T) []T {
+	arr := make([]T, n)
+	for i := 0; i < n; i++ {
+		arr[i] = def
+	}
+	return arr
+}
+
+func init2D[T comparable](n, m int, def T) [][]T {
+	arr := make([][]T, n)
+	for i := 0; i < n; i++ {
+		arr[i] = make([]T, m)
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			arr[i][j] = def
+		}
+	}
+	return arr
+}
+
+func solve() bool {
+	n := read(readInt)[0]
+	a := read(readInt)
+	b := read(readInt)
+
+	for i := 0; i < n; i++ {
+		if a[i] > b[i] {
+			return false
+		}
+		nxt := (i + 1) % n
+		if a[i] != b[i] {
+			a[nxt] = Max(a[nxt], b[i]-1)
+		}
+	}
+	// writeLn("Debug: ", a[0], b[0])
+	return (a[0] <= b[0])
 }
 func main() {
 	tc := read(readInt)[0]
 	for ; tc > 0; tc -= 1 {
-		solve()
+		var ans = "No"
+		if solve() {
+			ans = "Yes"
+		}
+		writeLn(ans)
 	}
 }

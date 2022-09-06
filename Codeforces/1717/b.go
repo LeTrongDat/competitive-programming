@@ -69,15 +69,50 @@ func write(arg ...interface{})                 { fmt.Print(arg...) }
 func writeLn(arg ...interface{})               { fmt.Println(arg...) }
 func writeFormat(f string, arg ...interface{}) { fmt.Printf(f, arg...) }
 
-func solve() {
-	n := read(readInt)[0]
-	pairs := []pair[int]{{1, 1}, {1, 2}, {1, 3}, {2, 1}, {3, 1}}
-	ans := 0
-	for _, pair := range pairs {
-		ft, nd := pair.First, pair.Second
-		ans += Min(n/ft, n/nd)
+func unpack[T comparable](arr []T, vars ...*T) {
+	for i, vari := range vars {
+		*vari = arr[i]
 	}
-	writeLn(ans)
+}
+
+func init1D[T comparable](n int, def T) []T {
+	arr := make([]T, n)
+	for i := 0; i < n; i++ {
+		arr[i] = def
+	}
+	return arr
+}
+
+func init2D[T comparable](n, m int, def T) [][]T {
+	arr := make([][]T, n)
+	for i := 0; i < n; i++ {
+		arr[i] = make([]T, m)
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			arr[i][j] = def
+		}
+	}
+	return arr
+}
+
+func solve() {
+	var n, k, r, c int
+	unpack(read(readInt), &n, &k, &r, &c)
+
+	r, c = r-1, c-1
+
+	matrix := init2D(k, k, '.')
+	for i := 0; i < k; i++ {
+		matrix[(r+i)%k][(c+i)%k] = 'X'
+	}
+
+	for i := 0; i < n; i++ {
+		for j := 0; j < n; j += k {
+			write(string(matrix[i%k]))
+		}
+		writeLn()
+	}
 }
 func main() {
 	tc := read(readInt)[0]
